@@ -1,0 +1,76 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Elegant Wedding Invitation</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Montserrat:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+      @font-face {
+        font-family: 'Seongsilche'; /* CSS에서 사용할 폰트 이름 */
+        src: url('/fonts/성실체.ttf') format('truetype'); /* public/fonts/ 폴더 기준 경로 */
+        font-weight: normal; 
+        font-style: normal; 
+      }
+
+      body {
+        font-family: 'Seongsilche', 'Playfair Display', 'Sandoll Neutom Light', '산돌 늦봄 Light', 'Malgun Gothic', sans-serif; 
+        scroll-behavior: smooth;
+      }
+      h1, h2, h3, .font-serif {
+        font-family: 'Playfair Display', serif; 
+      }
+      .custom-shadow {
+        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+      }
+      .animate-fade-in {
+        opacity: 0;
+        transform: translateY(40px); 
+        transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+      }
+      .animate-fade-in.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .bg-gradient-champagne {
+        background-image: linear-gradient(to bottom right, #f7f3e9, #e8dbd1);
+      }
+
+      @keyframes title-reveal {
+        from {
+          opacity: 0;
+          transform: translateY(20px); 
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .animate-title-reveal {
+        animation: title-reveal 1.2s ease-out forwards;
+        opacity: 0; 
+      }
+    </style>
+
+<link rel="stylesheet" href="/index.css">
+  <script type="importmap">
+{
+  "imports": {
+    "react-dom/": "https://esm.sh/react-dom@^19.1.0/",
+    "react/": "https://esm.sh/react@^19.1.0/",
+    "react": "https://esm.sh/react@^19.1.0"
+  }
+}
+</script>
+  <script type="module" crossorigin src="/assets/index-Cz1JvMmJ.js"></script>
+</head>
+  <body class="bg-gradient-champagne text-gray-700 antialiased">
+    <div id="root"></div>
+  </body>
+</html>
