@@ -8,7 +8,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Montserrat:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Montserrat:wght@300;400;500;700&family=Noto+Sans+KR:wght@300;400;500;700&family=Noto+Serif+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
     
     <style>
       @font-face {
@@ -19,26 +19,31 @@
       }
 
       body {
-        font-family: 'Seongsilche', 'Playfair Display', 'Sandoll Neutom Light', '산돌 늦봄 Light', 'Malgun Gothic', sans-serif; 
+        font-family: 'Noto Sans KR', 'Seongsilche', 'Montserrat', 'Malgun Gothic', sans-serif; 
         scroll-behavior: smooth;
+        /* Applying a base glass effect to the body can create an interesting overall texture, 
+           but might be too much. Sections will have more defined glass effects.
+           Consider removing if it conflicts with section-specific glassmorphism. */
       }
       h1, h2, h3, .font-serif {
-        font-family: 'Playfair Display', serif; 
+        font-family: 'Noto Serif KR', 'Playfair Display', serif; 
       }
       .custom-shadow {
-        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+        /* Refined shadow for more pop: */
+        box-shadow: 0 12px 30px -8px rgba(0, 0, 0, 0.1), 0 8px 15px -10px rgba(0, 0, 0, 0.08);
       }
       .animate-fade-in {
         opacity: 0;
-        transform: translateY(40px); 
-        transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        transform: translateY(30px); /* Slightly reduced distance */
+        transition: opacity 0.9s ease-out, transform 0.9s ease-out; /* Slightly longer duration */
       }
       .animate-fade-in.is-visible {
         opacity: 1;
         transform: translateY(0);
       }
       .bg-gradient-champagne {
-        background-image: linear-gradient(to bottom right, #f7f3e9, #e8dbd1);
+        /* Refined gradient: Softer, more luxurious champagne tones */
+        background-image: linear-gradient(to bottom right, #fdf8f0, #f8f0e8, #f3e8dd);
       }
 
       @keyframes title-reveal {
@@ -56,6 +61,52 @@
         animation: title-reveal 1.2s ease-out forwards;
         opacity: 0; 
       }
+
+      /* Base Glassmorphism effect for panels */
+      .glassmorphic-panel {
+        background-color: rgba(255, 255, 255, 0.65); /* Increased base opacity for better readability */
+        backdrop-filter: blur(20px); /* Increased blur */
+        -webkit-backdrop-filter: blur(20px); /* Safari support */
+        border: 1px solid rgba(255, 255, 255, 0.25); /* More subtle border */
+        border-radius: 1rem; /* Consistent with rounded-xl */
+      }
+
+      /* Specific for floating elements like buttons */
+      .glassmorphic-button {
+        background-color: rgba(255, 255, 255, 0.4); /* Less opaque for a lighter feel */
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        transition: background-color 0.3s ease, border-color 0.3s ease, transform 0.2s ease;
+      }
+      .glassmorphic-button:hover {
+        background-color: rgba(255, 255, 255, 0.55);
+        border-color: rgba(255, 255, 255, 0.35);
+      }
+
+      /* Styling for scrollbar (Webkit browsers) */
+      .scrollbar-thin::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+      }
+      .scrollbar-thin::-webkit-scrollbar-track {
+        background: rgba(247, 243, 233, 0.5); /* Champagne track */
+        border-radius: 10px;
+      }
+      .scrollbar-thin::-webkit-scrollbar-thumb {
+        background: rgba(212, 166, 114, 0.7); /* Amber thumb, slightly transparent */
+        border-radius: 10px;
+      }
+      .scrollbar-thin::-webkit-scrollbar-thumb:hover {
+        background: rgba(198, 149, 93, 0.9); /* Darker amber on hover */
+      }
+      /* For Firefox */
+      .scrollbar-thin {
+        scrollbar-width: thin;
+        scrollbar-color: rgba(212, 166, 114, 0.7) rgba(247, 243, 233, 0.5);
+      }
+
+
     </style>
 
 <link rel="stylesheet" href="/index.css">
@@ -64,13 +115,16 @@
   "imports": {
     "react-dom/": "https://esm.sh/react-dom@^19.1.0/",
     "react/": "https://esm.sh/react@^19.1.0/",
-    "react": "https://esm.sh/react@^19.1.0"
+    "react": "https://esm.sh/react@^19.1.0",
+    "path": "https://esm.sh/path@^0.12.7",
+    "vite": "https://esm.sh/vite@^6.3.5",
+    "url": "https://esm.sh/url@^0.11.4"
   }
 }
 </script>
-  <script type="module" crossorigin src="/wed_inv/assets/index-CxaWrzg6.js"></script>
+  <script type="module" crossorigin src="/wed_inv/assets/index-D0hFvs3B.js"></script>
 </head>
-  <body class="bg-gradient-champagne text-gray-700 antialiased">
+  <body class="bg-gradient-champagne text-gray-800 antialiased">
     <div id="root"></div>
   </body>
 </html>
