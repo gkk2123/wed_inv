@@ -8,104 +8,154 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Montserrat:wght@300;400;500;700&family=Noto+Sans+KR:wght@300;400;500;700&family=Noto+Serif+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Montserrat:wght@300;400;500;700&family=Noto+Sans+KR:wght@300;400;500;700&family=Noto+Serif+KR:wght@300;400;500;700&family=Maru+Buri:wght@300;400;500;700&family=Gotu&family=Petit+Formal+Script&display=swap" rel="stylesheet">
     
     <style>
       @font-face {
-        font-family: 'Seongsilche'; /* CSS에서 사용할 폰트 이름 */
-        src: url('/fonts/성실체.ttf') format('truetype'); /* public/fonts/ 폴더 기준 경로 */
+        font-family: 'Seongsilche';
+        src: url('/fonts/성실체.ttf') format('truetype');
         font-weight: normal; 
         font-style: normal; 
       }
+      /* Sourced from reference.md, assuming these are available or similar system fonts will be used by browser */
+      @font-face{font-family:Pretendard Light;src:url(https://framerusercontent.com/assets/DpSMzjpTWBSMrTHSlsoXIkRVV7o.woff2);font-display:swap}
+      @font-face{font-family:Pretendard Regular;src:url(https://framerusercontent.com/assets/a7GX613ZEtu1hvu5l4jsdIjsnsQ.woff2);font-display:swap}
+      @font-face{font-family:Pretendard Thin;src:url(https://framerusercontent.com/assets/5cTj5WVqeVB3POiirlqEiwglZA.woff2);font-display:swap}
 
       body {
-        font-family: 'Noto Sans KR', 'Seongsilche', 'Montserrat', 'Malgun Gothic', sans-serif; 
+        font-family: 'MaruBuri Regular', 'Gotu', 'Pretendard Regular', 'Noto Sans KR', 'Seongsilche', 'Montserrat', 'Malgun Gothic', sans-serif; 
         scroll-behavior: smooth;
-        /* Applying a base glass effect to the body can create an interesting overall texture, 
-           but might be too much. Sections will have more defined glass effects.
-           Consider removing if it conflicts with section-specific glassmorphism. */
+        background-color: #FFF9F5; /* Very pale pinkish cream as a base */
+        color: #4A4A4A; /* Default dark gray text */
       }
-      h1, h2, h3, .font-serif {
-        font-family: 'Noto Serif KR', 'Playfair Display', serif; 
+      h1, h2, h3, .font-serif-alt { /* Using a more specific class for alternate serif needs */
+        font-family: 'Noto Serif KR', 'Playfair Display', 'MaruBuri Regular', serif; 
       }
+      /* Main headings that need the Playfair Display Italic style from reference */
+      .font-display-italic {
+        font-family: 'Playfair Display', serif;
+        font-style: italic;
+      }
+       /* For names as per reference */
+      .font-names {
+        font-family: 'MaruBuri Regular', serif;
+      }
+      /* For special romantic text */
+      .font-scripted {
+        font-family: 'Petit Formal Script', cursive;
+      }
+      /* For body/descriptive text from reference */
+      .font-body-reference {
+        font-family: 'Gotu', 'MaruBuri Light', 'Pretendard Light', sans-serif;
+      }
+      .text-hero-shadow {
+        text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+      }
+
       .custom-shadow {
-        /* Refined shadow for more pop: */
-        box-shadow: 0 12px 30px -8px rgba(0, 0, 0, 0.1), 0 8px 15px -10px rgba(0, 0, 0, 0.08);
+        box-shadow: 0 6px 20px -6px rgba(0, 0, 0, 0.1); /* Softer, more diffuse shadow */
       }
       .animate-fade-in {
         opacity: 0;
-        transform: translateY(30px); /* Slightly reduced distance */
-        transition: opacity 0.9s ease-out, transform 0.9s ease-out; /* Slightly longer duration */
+        transform: translateY(25px); 
+        transition: opacity 0.8s ease-out, transform 0.8s ease-out;
       }
       .animate-fade-in.is-visible {
         opacity: 1;
         transform: translateY(0);
       }
-      .bg-gradient-champagne {
-        /* Refined gradient: Softer, more luxurious champagne tones */
-        background-image: linear-gradient(to bottom right, #fdf8f0, #f8f0e8, #f3e8dd);
-      }
 
-      @keyframes title-reveal {
+      @keyframes title-reveal { /* Keeping this, as it's a nice subtle effect for titles */
         from {
           opacity: 0;
-          transform: translateY(20px); 
+          transform: translateY(15px); 
         }
         to {
           opacity: 1;
           transform: translateY(0);
         }
       }
-
       .animate-title-reveal {
-        animation: title-reveal 1.2s ease-out forwards;
+        animation: title-reveal 1s ease-out forwards;
         opacity: 0; 
       }
 
-      /* Base Glassmorphism effect for panels */
-      .glassmorphic-panel {
-        background-color: rgba(255, 255, 255, 0.65); /* Increased base opacity for better readability */
-        backdrop-filter: blur(20px); /* Increased blur */
-        -webkit-backdrop-filter: blur(20px); /* Safari support */
-        border: 1px solid rgba(255, 255, 255, 0.25); /* More subtle border */
-        border-radius: 1rem; /* Consistent with rounded-xl */
+      /* Remove old glassmorphism - new aesthetic is cleaner, softer */
+      .glassmorphic-panel, .glassmorphic-button {
+        background-color: transparent;
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+        border: none;
       }
-
-      /* Specific for floating elements like buttons */
-      .glassmorphic-button {
-        background-color: rgba(255, 255, 255, 0.4); /* Less opaque for a lighter feel */
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        transition: background-color 0.3s ease, border-color 0.3s ease, transform 0.2s ease;
-      }
-      .glassmorphic-button:hover {
-        background-color: rgba(255, 255, 255, 0.55);
-        border-color: rgba(255, 255, 255, 0.35);
-      }
-
-      /* Styling for scrollbar (Webkit browsers) */
+      
+      /* Styling for scrollbar (Webkit browsers) - Soft pink theme */
       .scrollbar-thin::-webkit-scrollbar {
-        width: 8px;
-        height: 8px;
+        width: 6px; /* Thinner */
+        height: 6px;
       }
       .scrollbar-thin::-webkit-scrollbar-track {
-        background: rgba(247, 243, 233, 0.5); /* Champagne track */
-        border-radius: 10px;
+        background: #FFF0F5; /* Lavender blush - very light pink for track */
+        border-radius: 8px;
       }
       .scrollbar-thin::-webkit-scrollbar-thumb {
-        background: rgba(212, 166, 114, 0.7); /* Amber thumb, slightly transparent */
-        border-radius: 10px;
+        background: #F6B7DD; /* Soft Pink from reference.md */
+        border-radius: 8px;
       }
       .scrollbar-thin::-webkit-scrollbar-thumb:hover {
-        background: rgba(198, 149, 93, 0.9); /* Darker amber on hover */
+        background: #EAA2C8; /* Slightly darker pink on hover */
       }
       /* For Firefox */
       .scrollbar-thin {
         scrollbar-width: thin;
-        scrollbar-color: rgba(212, 166, 114, 0.7) rgba(247, 243, 233, 0.5);
+        scrollbar-color: #F6B7DD #FFF0F5; /* thumb track */
       }
 
+      /* General elegant button style based on reference (subtle) */
+      .btn-elegant {
+        padding: 0.6rem 1.5rem;
+        border-radius: 0.5rem;
+        font-family: 'MaruBuri Regular', 'Noto Sans KR', sans-serif;
+        font-size: 0.95rem;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+        border: 1px solid #F6B7DD; /* Soft pink border */
+        background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white */
+        color: #B26A86; /* Darker pink text */
+        box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      }
+      .btn-elegant:hover {
+        background-color: rgba(253, 236, 243, 0.9); /* Lighter pink hover */
+        transform: translateY(-1px);
+      }
+      .btn-elegant-primary {
+        background-color: #F6B7DD; /* Soft pink from reference.md */
+        color: white;
+        border-color: #F6B7DD;
+      }
+      .btn-elegant-primary:hover {
+        background-color: #EAA2C8; /* Darker pink */
+      }
+
+      /* General elegant input style */
+      .input-elegant {
+        background-color: rgba(255, 255, 255, 0.7) !important;
+        border: 1px solid #FADADD !important; /* Very light pink border */
+        border-radius: 0.5rem !important;
+        padding: 0.75rem 1rem !important;
+        color: #57434E !important; /* Muted dark text color */
+        font-family: 'Pretendard Regular', 'Noto Sans KR', sans-serif !important;
+      }
+      .input-elegant::placeholder {
+        color: #B28E9D !important; /* Muted placeholder */
+      }
+      .input-elegant:focus {
+        border-color: #F6B7DD !important; /* Soft pink focus */
+        box-shadow: 0 0 0 2px rgba(246, 183, 221, 0.3) !important;
+        outline: none !important;
+      }
+      .label-elegant {
+        font-family: 'MaruBuri Regular', 'Noto Sans KR', sans-serif;
+        color: #85677B; /* Muted pinkish-brown for labels */
+      }
 
     </style>
 
@@ -122,9 +172,9 @@
   }
 }
 </script>
-  <script type="module" crossorigin src="/wed_inv/assets/index-D0hFvs3B.js"></script>
+  <script type="module" crossorigin src="/wed_inv/assets/index-D5fuqvNT.js"></script>
 </head>
-  <body class="bg-gradient-champagne text-gray-800 antialiased">
+  <body class="text-gray-800 antialiased scrollbar-thin"> {/* Default body text color, added scrollbar-thin */}
     <div id="root"></div>
   </body>
 </html>
