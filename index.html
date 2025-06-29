@@ -8,7 +8,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Montserrat:wght@300;400;500;700&family=Noto+Sans+KR:wght@300;400;500;700&family=Noto+Serif+KR:wght@300;400;500;700&family=Maru+Buri:wght@300;400;500;700&family=Gotu&family=Petit+Formal+Script&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Montserrat:wght@300;400;500;700&family=Noto+Sans+KR:wght@300;400;500;700&family=Noto+Serif+KR:wght@300;400;500;700&family=Maru+Buri:wght@300;400;500;700&family=Gotu&family=Petit+Formal+Script&family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Serif+JP:wght@400;500;700&display=swap" rel="stylesheet">
     
     <style>
       @font-face {
@@ -22,36 +22,72 @@
       @font-face{font-family:Pretendard Regular;src:url(https://framerusercontent.com/assets/a7GX613ZEtu1hvu5l4jsdIjsnsQ.woff2);font-display:swap}
       @font-face{font-family:Pretendard Thin;src:url(https://framerusercontent.com/assets/5cTj5WVqeVB3POiirlqEiwglZA.woff2);font-display:swap}
 
+      /* --- FONT STYLING (Language-Aware) --- */
+      /* Default to Korean styles */
       body {
-        font-family: 'MaruBuri Regular', 'Gotu', 'Pretendard Regular', 'Noto Sans KR', 'Seongsilche', 'Montserrat', 'Malgun Gothic', sans-serif; 
+        font-family: 'Pretendard Regular', 'Noto Sans KR', 'Malgun Gothic', sans-serif;
         scroll-behavior: smooth;
-        background-color: #FFF9F5; /* Very pale pinkish cream as a base */
-        color: #4A4A4A; /* Default dark gray text */
+        background-color: #FFF9F5;
+        color: #4A4A4A;
+        word-break: keep-all; /* For Korean default, prevents breaking words in the middle */
+        overflow-wrap: break-word; /* Prevents long unbreakable strings from overflowing */
       }
-      h1, h2, h3, .font-serif-alt { /* Using a more specific class for alternate serif needs */
-        font-family: 'Noto Serif KR', 'Playfair Display', 'MaruBuri Regular', serif; 
+      h1, h2, h3, .font-serif-alt {
+        font-family: 'Noto Serif KR', 'Playfair Display', serif;
       }
-      /* Main headings that need the Playfair Display Italic style from reference */
+      
+      /* NEW: Improve text wrapping balance for readability */
+      @supports (text-wrap: pretty) {
+        p, h1, h2, h3, li {
+          text-wrap: pretty;
+        }
+      }
+
+      /* English Overrides */
+      body.lang-en {
+        font-family: 'Montserrat', sans-serif;
+        word-break: normal; /* Allow breaking based on spaces for English */
+      }
+      body.lang-en h1, body.lang-en h2, body.lang-en h3, body.lang-en .font-serif-alt {
+        font-family: 'Playfair Display', serif;
+      }
+      /* Japanese Overrides */
+      body.lang-ja {
+        font-family: 'Noto Sans JP', 'ヒラギノ角ゴ Pro W3', 'Hiragino Kaku Gothic Pro', 'メイリオ', Meiryo, sans-serif;
+        word-break: break-all; /* Allows breaking between any two characters for Japanese */
+      }
+      body.lang-ja h1, body.lang-ja h2, body.lang-ja h3, body.lang-ja .font-serif-alt {
+        font-family: 'Noto Serif JP', serif;
+      }
+      
+      /* Special-use font classes that are consistent across languages */
       .font-display-italic {
         font-family: 'Playfair Display', serif;
         font-style: italic;
       }
-       /* For names as per reference */
       .font-names {
         font-family: 'MaruBuri Regular', serif;
       }
-      /* For special romantic text */
       .font-scripted {
         font-family: 'Petit Formal Script', cursive;
       }
-      /* For body/descriptive text from reference */
-      .font-body-reference {
-        font-family: 'Gotu', 'MaruBuri Light', 'Pretendard Light', sans-serif;
+      .font-body-reference { /* A class for lighter, more descriptive text */
+        font-family: 'Gotu', 'Pretendard Light', 'Noto Sans KR', sans-serif;
+        font-weight: 300;
       }
+      body.lang-en .font-body-reference {
+        font-family: 'Gotu', 'Montserrat', sans-serif;
+        font-weight: 300;
+      }
+      body.lang-ja .font-body-reference {
+        font-family: 'Noto Sans JP', sans-serif;
+        font-weight: 300;
+      }
+      
+      /* --- UTILITY & ANIMATION STYLES --- */
       .text-hero-shadow {
-        text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+        text-shadow: 0 2px 10px rgba(0,0,0,0.7); /* Enhanced shadow */
       }
-
       .custom-shadow {
         box-shadow: 0 6px 20px -6px rgba(0, 0, 0, 0.1); /* Softer, more diffuse shadow */
       }
@@ -65,7 +101,7 @@
         transform: translateY(0);
       }
 
-      @keyframes title-reveal { /* Keeping this, as it's a nice subtle effect for titles */
+      @keyframes title-reveal { /* Kept for other titles */
         from {
           opacity: 0;
           transform: translateY(15px); 
@@ -79,6 +115,24 @@
         animation: title-reveal 1s ease-out forwards;
         opacity: 0; 
       }
+      
+      /* Character reveal animation */
+      @keyframes character-reveal {
+        from {
+          opacity: 0;
+          transform: translateY(20px) scale(0.9);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
+      }
+      .animate-character-reveal > span {
+        display: inline-block;
+        opacity: 0;
+        animation: character-reveal 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+      }
+
 
       /* Remove old glassmorphism - new aesthetic is cleaner, softer */
       .glassmorphic-panel, .glassmorphic-button {
@@ -172,7 +226,7 @@
   }
 }
 </script>
-  <script type="module" crossorigin src="/wed_inv/assets/index-DEJ2UXum.js"></script>
+  <script type="module" crossorigin src="/wed_inv/assets/index-sOZ99zww.js"></script>
 </head>
   <body class="text-gray-800 antialiased scrollbar-thin">
     <div id="root"></div>
